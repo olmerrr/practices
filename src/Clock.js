@@ -10,7 +10,7 @@ export default class Clock extends Component {
         this.timerID = setInterval(
             () => this.tick(),
             1000
-        )
+        );
     }
 
     componentWillUnmount() {
@@ -22,6 +22,7 @@ export default class Clock extends Component {
             date: new Date()
         });
     }
+
     render() {
         return (
             <div>
