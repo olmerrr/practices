@@ -1,0 +1,8 @@
+.form-wrapp{
+    padding: 20px;
+    background-color: lavender;
+}
+.form-wrapp input::placeholder,
+.form-wrapp button{
+    color:#333;
+}
