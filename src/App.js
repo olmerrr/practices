@@ -3,16 +3,16 @@ import './App.css';
 import Clock from "./Clock";
 import SubscribeForm from './SubscribeForm';
 import Toggle from "./Toggle";
-import Greeting from "./Greeting";
+import ShowWarning from "./ShowWarning";
 function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <Greeting isLoggedIn = {true}/>
                 <Clock/>
-                <Toggle/>
             </header>
+            <Toggle/>
             <main>
+                <ShowWarning/>
                 <SubscribeForm/>
             </main>
         </div>
