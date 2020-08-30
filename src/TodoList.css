@@ -1,0 +1,10 @@
+.todo-list-wrapp ul{
+    list-style: none;
+    color:#373839;
+    cursor:pointer;
+    font-weight: 500;
+    text-align: left;
+}
+.todo-list-wrapp li:hover{
+    opacity: .8;
+}
