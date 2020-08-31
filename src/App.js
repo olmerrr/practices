@@ -24,8 +24,6 @@ function App() {
                 <TodoList todos = {todoData}/>
             </main>
         </div>
-    )
-        ;
-}
+    )};
 
 export default App;
