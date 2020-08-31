@@ -1,11 +1,19 @@
 import React from "react";
 
-const TodoListItem = ({label, important = false}) => {
-    const style = {
-        color: important ? 'tomato' : 'black'
+export default class TodoListItem extends React.Component {
+    onLabelClick = () => {
+        console.log(`Done: ${this.props.label}`)
     };
-    return(
-        <div style = {style}>{label}</div>
-    )
+    render() {
+        const {label, important = false} = this.props;
+        const style = {
+            color: important ? 'tomato' : 'black'
+        };
+        return(
+            <div style = {style}
+                 onClick = {this.onLabelClick}
+            >{label}</div>
+        )
+    }
 }
-export  default TodoListItem;
+
