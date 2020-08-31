@@ -9,11 +9,12 @@ const SubscribeForm = (e) => {
 
     return (
          <form
-            className="form-wrapp"
+            className="form-wrapp "
             onClick={() => console.log('form')}>
                 <input type="text"
                    placeholder="Your e-mail"/>
-                <button onClick={handleClick}>
+                <button
+                    onClick={handleClick}>
                 Subscribe
                 </button>
         </form>

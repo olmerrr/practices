@@ -5,9 +5,9 @@ function WarningBanner(props){
         return null
     };
     return (
-        <div className="warning">
-            Warning!!
-        </div>
+            <div className="warning">
+                Warning!!
+            </div>
     )
 }
 export  default class Page extends Component {
@@ -22,9 +22,10 @@ export  default class Page extends Component {
 
     render() {
         return (
-            <div>
+            <div className="warning-wrapp">
                 <WarningBanner warn={this.state.showWarning} />
-                <button onClick={this.handleToggleClick}>
+                <button onClick={this.handleToggleClick}
+                className="btn btn-dark">
                     {this.state.showWarning ? 'Hide' : 'Show'}
                 </button>
             </div>

@@ -6,7 +6,7 @@ const TodoList = ({todos}) => {
     const elements = todos.map( (item) => {
         const {id, ...itemProps} = item;
         return(
-            <li key = {id}>
+            <li key = {id} className="list-group-item">
                 <TodoListItem
                   {...itemProps}
                 />
@@ -15,7 +15,7 @@ const TodoList = ({todos}) => {
         )
     })
     return <div className="todo-list-wrapp">
-        <ul>
+        <ul className="list-group todo-list">
             {elements}
         </ul>
     </div>

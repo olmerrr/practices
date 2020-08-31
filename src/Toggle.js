@@ -1,9 +1,10 @@
 import React, {Component} from "react";
+import './Toggle.css';
 
 export default class Toggle extends Component {
-        state = {
-            isToggleOn: true
-        }
+    state = {
+        isToggleOn: true
+    }
     handleClick = () => {
         this.setState(prevState => ({
             isToggleOn: !prevState.isToggleOn
@@ -12,9 +13,13 @@ export default class Toggle extends Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}>
-                {this.state.isToggleOn ? 'ON' : 'OFF'}
-            </button>
+            <div className="toggle-wrapp">
+                <button onClick={this.handleClick}
+                        className="btn btn-primary">
+                    {this.state.isToggleOn ? 'ON' : 'OFF'}
+                </button>
+
+            </div>
         );
     }
 }
