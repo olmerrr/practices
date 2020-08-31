@@ -11,11 +11,17 @@ export default class TodoListItem extends React.Component {
             done: true
         })
     };
+    onMarkImportantClick = () => {
+        this.setState({
+            important: true
+        })
+    };
 
     render() {
 
         const {label} = this.props;
         const {done, important} = this.state;
+
         let classNames = 'todo-list-item';
         if(done){
             classNames = classNames + ' done'
@@ -36,8 +42,10 @@ export default class TodoListItem extends React.Component {
                     <button type="button"
                             className="btn btn-outline-success
                             btn-sm float-right"
+                            onClick={this.onMarkImportantClick}
                     >
-                        <i className="fa fa-exclamation"/>
+                        <i className="fa fa-exclamation"
+                        />
                     </button>
                     <button type="button"
                             className="btn btn-outline-danger btn-sm float-right"
