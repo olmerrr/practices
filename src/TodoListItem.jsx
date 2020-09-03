@@ -14,7 +14,7 @@ export default class TodoListItem extends React.Component {
         })
     };
     onMarkImportantClick = () => {
-        this.setState( ({important}) => {
+        this.setState(({important}) => {
             return {
                 important: !important
             }
@@ -23,14 +23,14 @@ export default class TodoListItem extends React.Component {
 
     render() {
 
-        const {label} = this.props;
+        const {label, onDeleted} = this.props;
         const {done, important} = this.state;
 
         let classNames = 'todo-list-item';
-        if(done){
+        if (done) {
             classNames = classNames + ' done'
         };
-        if(important){
+        if (important) {
             classNames = classNames + ' important'
         };
         return (
@@ -43,18 +43,19 @@ export default class TodoListItem extends React.Component {
                     {label}
                 </span>
 
-                    <button type="button"
-                            className="btn btn-outline-success
+                <button type="button"
+                        className="btn btn-outline-success
                             btn-sm float-right"
-                            onClick={this.onMarkImportantClick}
-                    >
-                        <i className="fa fa-exclamation"
-                        />
-                    </button>
-                    <button type="button"
-                            className="btn btn-outline-danger btn-sm float-right"
-                    >
-                        <i className="fa fa-trash-o"/>
+                        onClick={this.onMarkImportantClick}
+                >
+                    <i className="fa fa-exclamation"
+                    />
+                </button>
+                <button type="button"
+                        className="btn btn-outline-danger btn-sm float-right"
+                        onClick={onDeleted}
+                >
+                    <i className="fa fa-trash-o"/>
                 </button>
             </div>
         )
