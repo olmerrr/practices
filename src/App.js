@@ -4,7 +4,7 @@ import Clock from "./Clock";
 import SubscribeForm from './SubscribeForm';
 import Toggle from "./Toggle";
 import ShowWarning from "./ShowWarning";
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList/TodoList";
 import ItemAddForm from "./components/ItemAddForm/index";
 
 export default class App extends Component {
@@ -32,20 +32,26 @@ export default class App extends Component {
     addItem = (text) => {
         const newItem = {
             label: text,
-            important: false,
+            import: false,
             id: this.maxId++
-        }
-        this.setState(({todoData}) => {
-          const newArr = [
-              ...todoData,
-              newItem
-          ];
-          return {
-              todoData: newArr
-          };
+        };
+        this.setState( ({todoData}) => {
+            const newArr = [
+                ...todoData,
+                newItem
+            ];
+            return {
+                todoData: newArr
+            }
         })
-    }
+    };
 
+    onToggleImportant = (id) =>{
+        console.log('Toggle Important',id)
+    };
+    onToggleDone = (id) =>{
+        console.log('Done',id)
+    };
     render() {
         return (
             <div className="App">
@@ -58,9 +64,13 @@ export default class App extends Component {
                     <SubscribeForm/>
                     <TodoList
                         onDeleted={this.deleteItem}
-                        todos={this.state.todoData}/>
-                    <ItemAddForm
-                        onItemAdded={this.addItem}
+                        todos={this.state.todoData}
+
+                        onToggleImportant={this.onToggleImportant}
+                        onToggleDone={this.onToggleDone}
+                        />
+                        <ItemAddForm
+                        onItemAdded = {this.addItem}
                     />
                 </main>
             </div>
