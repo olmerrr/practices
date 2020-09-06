@@ -1,32 +1,19 @@
 import React from "react";
 import './TodoListItem.css'
-
 export default class TodoListItem extends React.Component {
 
     render() {
 
-        const {
-            label, onDeleted,
-            important,
-            done,
-            onToggleImportant,
-            onToggleDone
-        } = this.props;
+        const {label, onDeleted, onToggleDone, onToggleImportant, done, important} = this.props;
 
         let classNames = 'todo-list-item';
-        if (done) {
-            classNames = classNames + ' done'
-        };
-        if (important) {
-            classNames = classNames + ' important'
-        }
-        ;
+
         return (
             <div className={classNames}>
-
                 <span
                     onClick={onToggleDone}
                     className="todo-list-item-label"
+
                 >
                     {label}
                 </span>

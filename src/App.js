@@ -11,11 +11,21 @@ export default class App extends Component {
     maxId = 100;
     state = {
         todoData: [
-            {label: 'Drink Coffee', important: false, id: 1},
-            {label: 'Make Awesome App', important: true, id: 2},
-            {label: 'Have a lunch', important: false, id: 3}
+            this.createTodoItem('Drink tee'),
+            this.createTodoItem('Drink vodka'),
+            this.createTodoItem('Create todo app')
+
         ]
     };
+
+    createTodoItem(label) {
+        return {
+            label,
+            important: false,
+            done: false,
+            id: this.maxId++
+        }
+    }
 
     deleteItem = (id) => {
         this.setState(({todoData}) => {
@@ -30,12 +40,8 @@ export default class App extends Component {
         });
     };
     addItem = (text) => {
-        const newItem = {
-            label: text,
-            import: false,
-            id: this.maxId++
-        };
-        this.setState( ({todoData}) => {
+        const newItem = this.createTodoItem(text);
+        this.setState(({todoData}) => {
             const newArr = [
                 ...todoData,
                 newItem
@@ -45,13 +51,28 @@ export default class App extends Component {
             }
         })
     };
+    onToggleImportant = (id) => {
+        console.log('Important', id)
+    };
+    onToggleDone = (id) => {
+        this.setState(({todoData}) => {
+            const idx = todoData.find((el) => el.id === id);
+            const oldItem = todoData[idx];
+            const newItem = {
+                ...oldItem,
+                done: !oldItem.done
+            };
+            const newArray = [
+                ...todoData.slice(0, idx), //выреж от нуля до idx,
+                newItem,
+                ...todoData.slice(idx + 1) // выреж после idx с шагом на 1
+            ]
+            return {
+                todoData: newArray
+            };
+        })
+    };
 
-    onToggleImportant = (id) =>{
-        console.log('Toggle Important',id)
-    };
-    onToggleDone = (id) =>{
-        console.log('Done',id)
-    };
     render() {
         return (
             <div className="App">
@@ -65,12 +86,12 @@ export default class App extends Component {
                     <TodoList
                         onDeleted={this.deleteItem}
                         todos={this.state.todoData}
-
                         onToggleImportant={this.onToggleImportant}
                         onToggleDone={this.onToggleDone}
-                        />
-                        <ItemAddForm
-                        onItemAdded = {this.addItem}
+                    />
+
+                    <ItemAddForm
+                        onItemAdded={this.addItem}
                     />
                 </main>
             </div>
