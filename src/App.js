@@ -26,7 +26,19 @@ export default class App extends Component {
             id: this.maxId++
         }
     }
+    toggleProperty (arr, id, propName){
+        const idx = arr.findIndex((el) => el.id === id);
+        const oldItem = arr[idx]; // todoData[idx] one click one lable
+        const newItem = {...oldItem, [propName]: !oldItem[propName]} //создаем копию обьекта с !done
+        //    2 construct new arr
 
+        return [
+            ...arr.slice(0, idx),
+            newItem,
+            ...arr.slice(idx + 1) // выреж после idx с шагом на 1
+        ]
+
+    }
     deleteItem = (id) => {
         this.setState(({todoData}) => {
             const idx = todoData.findIndex((el) => el.id === id);
@@ -53,24 +65,18 @@ export default class App extends Component {
     };
     onToggleDone = (id) => {
         this.setState(({todoData}) => {
-            const idx = todoData.findIndex((el) => el.id === id);
-            //    1 update obj
-            const oldItem = todoData[idx]; // todoData[idx] one click one lable
-            const newItem = {...oldItem, done: !oldItem.done} //создаем копию обьекта с !done
-            //    2 construct new arr
-
-            const newArray = [
-                ...todoData.slice(0, idx),
-                newItem,
-                ...todoData.slice(idx + 1) // выреж после idx с шагом на 1
-            ]
             return{
-                todoData: newArray
+                todoData: this.toggleProperty(todoData, id, 'done')
             }
         })
     };
     onToggleImportant = (id) => {
-        console.log('Important', id)
+        this.setState(({todoData}) => {
+            return{
+                todoData: this.toggleProperty(todoData, id, 'important')
+            }
+        })
+
     };
 
     render() {
