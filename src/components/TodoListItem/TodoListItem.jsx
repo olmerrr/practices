@@ -1,5 +1,6 @@
 import React from "react";
 import './TodoListItem.css'
+
 export default class TodoListItem extends React.Component {
 
     render() {
@@ -7,7 +8,12 @@ export default class TodoListItem extends React.Component {
         const {label, onDeleted, onToggleDone, onToggleImportant, done, important} = this.props;
 
         let classNames = 'todo-list-item';
-
+        if (done) {
+            classNames = classNames + ' done'
+        };
+        if (important) {
+            classNames = classNames + ' important'
+        };
         return (
             <div className={classNames}>
                 <span

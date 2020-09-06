@@ -51,29 +51,33 @@ export default class App extends Component {
             }
         })
     };
-    onToggleImportant = (id) => {
-        console.log('Important', id)
-    };
     onToggleDone = (id) => {
         this.setState(({todoData}) => {
-            const idx = todoData.find((el) => el.id === id);
-            const oldItem = todoData[idx];
-            const newItem = {
-                ...oldItem,
-                done: !oldItem.done
-            };
+            const idx = todoData.findIndex((el) => el.id === id);
+            //    1 update obj
+            const oldItem = todoData[idx]; // todoData[idx] one click one lable
+            const newItem = {...oldItem, done: !oldItem.done} //создаем копию обьекта с !done
+            //    2 construct new arr
+
             const newArray = [
-                ...todoData.slice(0, idx), //выреж от нуля до idx,
+                ...todoData.slice(0, idx),
                 newItem,
                 ...todoData.slice(idx + 1) // выреж после idx с шагом на 1
             ]
-            return {
+            return{
                 todoData: newArray
-            };
+            }
         })
+    };
+    onToggleImportant = (id) => {
+        console.log('Important', id)
     };
 
     render() {
+        const doneCount = this.state.todoData
+            .filter( (el) => el.done).length;
+        const todoCount = this.state.todoData.length - doneCount;
+//this.state.todoData - весь массив данных
         return (
             <div className="App">
                 <header className="App-header">
