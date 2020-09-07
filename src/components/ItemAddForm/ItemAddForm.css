@@ -1,3 +1,8 @@
 .item-add-form{
     padding: 20px;
+    display: flex;
+
+}
+.item-add-form input{
+    margin-right: 5px;
 }
