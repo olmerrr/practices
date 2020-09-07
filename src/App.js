@@ -26,19 +26,7 @@ export default class App extends Component {
             id: this.maxId++
         }
     }
-    toggleProperty (arr, id, propName){
-        const idx = arr.findIndex((el) => el.id === id);
-        const oldItem = arr[idx]; // todoData[idx] one click one lable
-        const newItem = {...oldItem, [propName]: !oldItem[propName]} //создаем копию обьекта с !done
-        //    2 construct new arr
 
-        return [
-            ...arr.slice(0, idx),
-            newItem,
-            ...arr.slice(idx + 1) // выреж после idx с шагом на 1
-        ]
-
-    }
     deleteItem = (id) => {
         this.setState(({todoData}) => {
             const idx = todoData.findIndex((el) => el.id === id);
@@ -63,27 +51,37 @@ export default class App extends Component {
             }
         })
     };
+    toggleProperty(arr,id, propName)  {
+        const idx = arr.findIndex( (el) => el.id === id);
+        const oldItem = arr[idx];
+        const newItem = {...oldItem, [propName]: !oldItem[propName]}
+//[propName] передача динамически свойства
+        return [
+            ...arr.slice(0, idx),
+            newItem,
+            ...arr.slice(idx + 1)
+        ];
+    }
+
     onToggleDone = (id) => {
         this.setState(({todoData}) => {
-            return{
+            return {
                 todoData: this.toggleProperty(todoData, id, 'done')
-            }
-        })
+        }
+        });
     };
+
     onToggleImportant = (id) => {
         this.setState(({todoData}) => {
-            return{
+            return {
                 todoData: this.toggleProperty(todoData, id, 'important')
             }
-        })
 
+        })
     };
 
     render() {
-        const doneCount = this.state.todoData
-            .filter( (el) => el.done).length;
-        const todoCount = this.state.todoData.length - doneCount;
-//this.state.todoData - весь массив данных
+
         return (
             <div className="App">
                 <header className="App-header">
