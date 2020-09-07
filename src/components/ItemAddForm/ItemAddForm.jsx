@@ -12,7 +12,10 @@ export default class ItemAddForm extends Component {
     }
     onSubmitForm = (e) => {
         e.preventDefault();
-        this.props.onItemAdded(this.state.label)
+        this.props.onItemAdded(this.state.label);
+        this.setState({
+            label: ''
+        })
     }
 
     render() {
@@ -26,6 +29,8 @@ export default class ItemAddForm extends Component {
                        placeholder="What i need do?"
                        className="form-control"
                        onChange={this.onLabelChange}
+                        value={this.state.label}
+
                 />
 
                 <button className="btn btn-outline-secondary"
