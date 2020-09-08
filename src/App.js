@@ -17,7 +17,7 @@ export default class App extends Component {
             this.createTodoItem('Create todo app')
 
         ],
-        term: 'vod'
+        term: ''
     };
 
     createTodoItem(label) {
@@ -91,6 +91,9 @@ export default class App extends Component {
             return item.label.indexOf(term) > -1;
         })
     };
+    onSearchChange = (term) => {
+    this.setState({term})
+    };
 
     render() {
         const {todoData, term} = this.state;
@@ -102,9 +105,9 @@ export default class App extends Component {
                 </header>
                 <Toggle/>
                 <main>
-                    <ShowWarning/>
-                    <SubscribeForm/>
-                    <SearchPanel/>
+                    {/*<ShowWarning/>*/}
+                    {/*<SubscribeForm/>*/}
+                    <SearchPanel onSearchChange = {this.onSearchChange}/>
                     <TodoList
                         onDeleted={this.deleteItem}
                         todos={visibleItems}
