@@ -88,11 +88,14 @@ export default class App extends Component {
             return items;
         }
         return items.filter((item) => {
-            return item.label.indexOf(term) > -1;
+            return item.label
+                .toLowerCase().indexOf(term
+                .toLowerCase()) > -1;
         })
     };
+
     onSearchChange = (term) => {
-    this.setState({term})
+        this.setState({term})
     };
 
     render() {
@@ -107,7 +110,7 @@ export default class App extends Component {
                 <main>
                     {/*<ShowWarning/>*/}
                     {/*<SubscribeForm/>*/}
-                    <SearchPanel onSearchChange = {this.onSearchChange}/>
+                    <SearchPanel onSearchChange={this.onSearchChange}/>
                     <TodoList
                         onDeleted={this.deleteItem}
                         todos={visibleItems}
