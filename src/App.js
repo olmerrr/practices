@@ -6,6 +6,7 @@ import Toggle from "./Toggle";
 import ShowWarning from "./ShowWarning";
 import TodoList from "./components/TodoList/TodoList";
 import ItemAddForm from "./components/ItemAddForm/index";
+import SearchPanel from "./components/SearchPanel/SearchPanel";
 
 export default class App extends Component {
     maxId = 100;
@@ -15,7 +16,8 @@ export default class App extends Component {
             this.createTodoItem('Drink vodka'),
             this.createTodoItem('Create todo app')
 
-        ]
+        ],
+        term: 'vod'
     };
 
     createTodoItem(label) {
@@ -51,8 +53,9 @@ export default class App extends Component {
             }
         })
     };
-    toggleProperty(arr,id, propName)  {
-        const idx = arr.findIndex( (el) => el.id === id);
+
+    toggleProperty(arr, id, propName) {
+        const idx = arr.findIndex((el) => el.id === id);
         const oldItem = arr[idx];
         const newItem = {...oldItem, [propName]: !oldItem[propName]}
 //[propName] передача динамически свойства
@@ -67,7 +70,7 @@ export default class App extends Component {
         this.setState(({todoData}) => {
             return {
                 todoData: this.toggleProperty(todoData, id, 'done')
-        }
+            }
         });
     };
 
@@ -80,8 +83,18 @@ export default class App extends Component {
         })
     };
 
-    render() {
+    search(items, term) {
+        if (term.length === 0) {
+            return items;
+        }
+        return items.filter((item) => {
+            return item.label.indexOf(term) > -1;
+        })
+    };
 
+    render() {
+        const {todoData, term} = this.state;
+        const visibleItems = this.search(todoData, term);
         return (
             <div className="App">
                 <header className="App-header">
@@ -91,9 +104,10 @@ export default class App extends Component {
                 <main>
                     <ShowWarning/>
                     <SubscribeForm/>
+                    <SearchPanel/>
                     <TodoList
                         onDeleted={this.deleteItem}
-                        todos={this.state.todoData}
+                        todos={visibleItems}
                         onToggleImportant={this.onToggleImportant}
                         onToggleDone={this.onToggleDone}
                     />
